@@ -11,7 +11,7 @@ function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const targetDate = new Date('2026-11-15T08:00:00').getTime();
+    const targetDate = new Date('2026-08-22T15:30:00').getTime();
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
@@ -162,7 +162,7 @@ function App() {
               <div className="header-ornament left"><span></span><span></span><span></span></div>
               <div className="header-text-group">
                 <p className="greeting">Kính gửi</p>
-                <h2 className="guest-name">Bạn thân mến</h2>
+                <h2 className="guest-name">Bạn Thân Mến</h2>
                 <div className="guest-name-line"></div>
               </div>
               <div className="header-ornament right"><span></span><span></span><span></span></div>
@@ -230,7 +230,7 @@ function App() {
                 <div className="graduate-avatar">👩‍🎓</div>
                 <div className="graduate-details">
                   <h2 className="graduate-name">Nguyễn Thúy Duy</h2>
-                  <p className="graduate-major">Kỹ Sư Công nghệ Thông tin</p>
+                  <p className="graduate-major">Kỹ Sư Công Nghệ Thông Tin</p>
                   <p className="graduate-school">Trường Đại học Nam Cần Thơ</p>
                 </div>
               </div>
