@@ -18,3 +18,15 @@ body {
   justify-content: center;
   padding: 20px;
 }
+
+/* Mobile: bỏ padding để khung vừa khít màn hình */
+@media (max-width: 540px) {
+  body {
+    overflow: hidden;
+  }
+
+  #root {
+    padding: 0;
+    align-items: stretch;
+  }
+}
