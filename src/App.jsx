@@ -5,7 +5,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -41,12 +41,33 @@ function App() {
     setTimeout(() => setShowConfetti(false), 6000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.message.trim()) return;
-    setSubmitted(true);
-    setFormData({ name: '', phone: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 4000);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/thuyduy.0943454010@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          message: formData.message,
+          _subject: `💌 Lời chúc tốt nghiệp từ ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      setSubmitted(true);
+      setFormData({ name: '', message: '' });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (error) {
+      console.error('Lỗi gửi lời chúc:', error);
+      alert('Rất tiếc, gửi lời chúc thất bại. Vui lòng thử lại!');
+    }
   };
 
   const confettiColors = ['#c9a96e', '#ffd700', '#8b6914', '#ff6b6b', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
@@ -261,18 +282,6 @@ function App() {
                   <div className="input-icon">👤</div>
                   <input type="text" className="wish-input" placeholder="Tên của bạn *" value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})} required />
-                </div>
-                <div className="input-row">
-                  <div className="input-group">
-                    <div className="input-icon">📱</div>
-                    <input type="tel" className="wish-input" placeholder="Số điện thoại" value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-                  </div>
-                  <div className="input-group">
-                    <div className="input-icon">✉️</div>
-                    <input type="email" className="wish-input" placeholder="Email" value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})} />
-                  </div>
                 </div>
                 <div className="input-group textarea-group">
                   <div className="textarea-icon">💭</div>
